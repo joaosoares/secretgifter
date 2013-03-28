@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" charset="UTF-8">
+  <title>SecretGifter - An easy way to organize your next gift-exchanging gathering</title>
+  <!-- Bootstrap -->
+  <link href="{{ url_for('static', filename='bootstrap.css')}}" rel="stylesheet" media="screen">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css')}}" />
+</head>
+<body>
+  <div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar-inner">
+      <div class="container-narrow">
+        <a href="#" class="brand"><img src="{{url_for('static', filename='img/logo_small.png')}}" alt="" /></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="container-narrow">
+    {% block body %}{% endblock %}
+  </div>
+</body>
+</html>
