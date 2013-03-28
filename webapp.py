@@ -1,3 +1,4 @@
+import os
 from main import *
 from flask import Flask, session, redirect, url_for, render_template
 from flask.ext import login
@@ -27,6 +28,7 @@ def register():
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    port = int(os.environ.get('PORT', 5000))
+    app.run(host='0.0.0.0')
 
 
