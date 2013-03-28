@@ -11,13 +11,22 @@
   <div class="navbar navbar-inverse navbar-fixed-top">
     <div class="navbar-inner">
       <div class="container-narrow">
-        <a href="#" class="brand"><img src="{{url_for('static', filename='img/logo_small.png')}}" alt="" /></a>
+        <a href="{{url_for('mainpage')}}" class="brand"><img src="{{url_for('static', filename='img/logo_small.png')}}" alt="" /></a>
+        <div class="nav-collapse collapse pull-right">
+          <ul class="nav">
+            <li><a href="{{url_for('about')}}">About</a></li>
+            <li><a href="{{url_for('pricing')}}">Pricing</a></li>
+            <li><a href="{{url_for('login')}}">Login</a></li>
+          </ul>
+        </div>
       </div>
     </div>
   </div>
 
   <div class="container-narrow">
-    {% block body %}{% endblock %}
+    <div class="jumbotron">
+      {% block body %}{% endblock %}
+    </div>
   </div>
 </body>
 </html>

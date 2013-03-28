@@ -24,8 +24,17 @@ def login():
 def register():
     return "Register page"
 
+@app.route("/about")
+def about():
+    return "About page"
 
+@app.route("/pricing")
+def pricing():
+    return "Pricing page"
 
+@app.route("/table")
+def table():
+    return render_template("participants.html")
 
 if __name__ == "__main__":
     port = int(os.environ.get('PORT', 5000))

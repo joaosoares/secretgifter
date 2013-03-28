@@ -1,10 +1,8 @@
 {% extends "layout.html" %}
 {% block body %}
-<div class="jumbotron">
   <img src="{{url_for('static',filename='img/logo.png')}}" alt="" />
   <h1>Organize your gift exchange.</h1>
   <p class="lead">SecretGifter is a small utility I have developed to make it easy to organize secret gift exchanges. It automatically makes a draw among participants and sends everyone an SMS with the person they've drawn.</p>
   <a href="{{ url_for('register') }}" class="btn btn-large btn-success">Sign up today</a>
   <a href="{{ url_for('login') }}" class="btn">Login</a>
-</div>
 {% endblock %}
