@@ -2,9 +2,14 @@ import os
 from main import *
 from flask import Flask, session, redirect, url_for, render_template
 from flask.ext import login
+from flask.ext.sqlalchemy import SQLAlchemy
 from wtforms import Form, BooleanField, TextField, PasswordField, validators
 
 app = Flask(__name__)
+
+# CONFIG
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ['DATABASE_URL']
+db = SQLAlchemy(app)
 
 # login
 
