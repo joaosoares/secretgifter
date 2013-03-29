@@ -1,0 +1,17 @@
+{% extends "layout.html" %}
+{% block body %}
+
+<h2 class="form-signin-heading">Please sign in</h2>
+<form method="POST" class="form-horizontal" name="login">
+  {{form.hidden_tag()}}
+  {% for field in form if field.widget.input_type != 'hidden' %}
+  <div class="control-group">
+    {{field.label(class_="control-label")}}
+    <div class="controls">{{field}}</div>
+  </div>
+  {% endfor %}
+  <div class="control-group"></div>
+  <button type="submit" class="btn">Login</button>
+</form>
+
+{% endblock %}

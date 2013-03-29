@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" charset="UTF-8">
+  <title>SecretGifter - An easy way to organize your next gift-exchanging gathering</title>
+  <!-- Bootstrap -->
+  <link href="{{ url_for('static', filename='css/bootstrap.css')}}" rel="stylesheet" media="screen">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css')}}" />
+</head>
+<body>
+  <div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar-inner">
+      <div class="container-narrow">
+        <a href="{{url_for('mainpage')}}" class="brand"><img src="{{url_for('static', filename='img/logo_small.png')}}" alt="" /></a>
+        <div class="nav-collapse collapse pull-right">
+          <ul class="nav">
+            <li><a href="{{url_for('about')}}">About</a></li>
+            <li><a href="{{url_for('pricing')}}">Pricing</a></li>
+            <li><a href="{{url_for('login')}}">Login</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+
+
+  <div class="container-narrow body-margin">
+
+  {% with messages = get_flashed_messages() %}
+    {% if messages %}
+      {% for message in messages %}
+        <div class="alert">
+          <button type="button" class="close" data-dismiss="alert">&times;</button>
+          {{ message }}
+        </div>
+      {% endfor %}
+    {% endif %}
+  {% endwith %}
+    
+    <div class="jumbotron well">
+      {% block body %}{% endblock %}
+    </div>
+  </div>
+</body>
+</html>

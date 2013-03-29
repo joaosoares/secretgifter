@@ -1,0 +1,36 @@
+{% extends "layout.html" %}
+{% block body %}
+<form class="add" action="" method="post" name="addperson">
+<table class="table table-hover table-striped">
+  <tr>
+    <th>Name</th>
+    <th>Cellphone number</th>
+    <th>Gift</th>
+    <th></th>
+  </tr>
+  {% if participants  %}
+  {% for person in participants %}
+    <tr>
+      <td>{{ person.name }}</td>
+      <td>{{ person.number }}</td>
+      <td>{{ person.gift }}</td>
+      <td><small><a href="#">Edit</a> / <a href="#">Remove</a></small></td>
+    </tr>
+  {% endfor %}
+  {% else %}
+    <tr>
+      <td colspan="4">
+        No one added yet. Just type their info below!
+      </td>
+    </tr>
+  {% endif %}
+    <tr>
+
+      <td>{{form.hidden_tag()}}{{form.name}}</td>
+      <td>{{form.number}}</td>
+      <td>{{form.gift}}</td>
+      <td><input class="btn btn-small" type="submit" value="Add" /></td>
+    </tr>
+</table>
+</form>
+{% endblock %}
