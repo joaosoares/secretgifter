@@ -1,0 +1,7 @@
+{% extends "layout.html" %}
+{% block body %}
+  <img id="mainlogo" src="{{url_for('static',filename='img/logo.png')}}" alt="" />
+  <h1>Whoops!</h1>
+  <p class="lead">You do not have permission to see this page.</p>
+  <a href="{{ url_for('mainpage') }}" class="btn">Back to the home page</a>
+{% endblock %}
