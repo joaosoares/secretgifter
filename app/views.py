@@ -18,19 +18,26 @@ def login():
     form = LoginForm()
     if form.validate_on_submit():
         session['remember_me'] = form.remember_me.data
-        flash("Welcome!")
+        login_user(form.user)
+        flash("Welcome, %s!" % form.user.name)
         return redirect(url_for('mainpage'))
+    if form.errors:
+        flash("Incorrect user or password")
     return render_template('login.html', form = form)
 
-@app.route("/register")
+@app.route("/register", methods=['GET', 'POST'])
 def register():
     form = RegistrationForm(request.form)
     if request.method == 'POST' and form.validate():
-        user = User(form.email.data, form.password.data)
-        db_session.add(user)
-        flash('Thanks for registering')
+        flash('Thanks for registering. You have been logged in.')
+        login_user(form.user)
         return redirect(url_for('login'))
     return render_template('register.html', form=form)
+
+@app.route('/logout/')
+def logout():
+    logout_user()
+    return redurect(url_for('mainpage'))
 
 @app.route("/about/")
 def about():
@@ -38,7 +45,7 @@ def about():
 
 @app.route("/pricing/")
 def pricing():
-    return "Pricing page"
+    return render_template('pricing.html')
 
 @app.route("/draws/<drawid>", methods = ['GET', 'POST'])
 def table(drawid):
@@ -47,6 +54,11 @@ def table(drawid):
         pass
     return render_template("participants.html", form=add_form)
 
+@app.before_request
+def before_request():
+    g.user = current_user
+
 @lm.user_loader
 def load_user(id):
     return User.query.get(int(id))
+

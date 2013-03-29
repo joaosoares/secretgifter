@@ -14,9 +14,17 @@
         <a href="{{url_for('mainpage')}}" class="brand"><img src="{{url_for('static', filename='img/logo_small.png')}}" alt="" /></a>
         <div class="nav-collapse collapse pull-right">
           <ul class="nav">
+            {% if g.user.is_authenticated() %}
+            <li><a class="btn btn-small" href="{{url_for('new_draw')}}">New Draw</a></li>
+            <li><a href="{{url_for('draws')}}">Draws</a></li>
+            <li><a href="{{url_for('add_credits')}}">Add credits</a></li>
+            <li><a href="{{url_for('account')}}">Account</a></li>
+            <li><a href="{{url_for('logout')}}">Logout</a></li>
+            {% else %}
             <li><a href="{{url_for('about')}}">About</a></li>
             <li><a href="{{url_for('pricing')}}">Pricing</a></li>
-            <li><a href="{{url_for('login')}}">Login</a></li>
+            <li class="dropdown-toggle"><a href="{{url_for('login')}}">Login</a></li>
+            {% endif %}
           </ul>
         </div>
       </div>
@@ -38,9 +46,11 @@
     {% endif %}
   {% endwith %}
     
-    <div class="jumbotron well">
+    <div class="jumbotron">
       {% block body %}{% endblock %}
     </div>
   </div>
-</body>
+  <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
+  <script type="text/javascript" src="{{url_for('static', filename='js/bootstrap.js')}}"></script>
+  </body>
 </html>

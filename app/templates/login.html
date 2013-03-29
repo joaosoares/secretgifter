@@ -1,17 +1,28 @@
 {% extends "layout.html" %}
 {% block body %}
 
-<h2 class="form-signin-heading">Please sign in</h2>
-<form method="POST" class="form-horizontal" name="login">
+<legend>Sign in</legend>
+<div class="form-fullpage clearfix">
+<form method="POST" id="login" class="form-horizontal well" name="login">
   {{form.hidden_tag()}}
   {% for field in form if field.widget.input_type != 'hidden' %}
   <div class="control-group">
     {{field.label(class_="control-label")}}
-    <div class="controls">{{field}}</div>
+    <div class="controls">{{field(placeholder=field.label.text)}}</div>
   </div>
   {% endfor %}
-  <div class="control-group"></div>
-  <button type="submit" class="btn">Login</button>
+  <div class="control-group">
+    <div class="controls">
+      <button type="submit" class="btn">Login</button>
+    </div>
+  </div>
+  <div class="control-group">
+    <div class="controls">
+      <a href={{url_for('register')}} class="btn">I don't have an account.</a>
+    </div>
+  </div>
 </form>
+
+</div>
 
 {% endblock %}

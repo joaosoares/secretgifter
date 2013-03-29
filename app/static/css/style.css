@@ -24,11 +24,10 @@ body {
 
 .jumbotron {
   padding: 30px;
-  text-align: center;
-  /* background-color: rgba(255,255,255,0.7);
+  background-color: rgba(255,255,255,0.5);
   -webkit-border-radius: 10px;
   -moz-border-radius: 10px;
-  border-radius: 10px; */
+  border-radius: 10px;
 }
 
 /*
@@ -54,6 +53,31 @@ form.add input {
   width:inherit;
 }
 
-.jumbotron form.form-horizontal {
+.form-fullpage {
   text-align:left;
+}
+
+.form-fullpage .control-label {
+  width:100px;
+}
+
+.form-fullpage .controls {
+  margin-left: 120px;
+}
+
+/*
+form#login {
+  width:70%;
+  text-align:left;
+}
+
+form#login input {
+  max-width: auto;
+}
+*/
+
+img#mainlogo {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
