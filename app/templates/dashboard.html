@@ -1,0 +1,7 @@
+{% extends "layout.html" %}
+{% block body %}
+<h2>Hey there, {{user.name}}.</h2>
+<p class="lead">What do you want to do?</p>
+<a href="{{url_for('new_draw')}}" class="btn btn-success">Create new draw</a>
+
+{% endblock %}
