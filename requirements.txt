@@ -9,12 +9,15 @@ Flask-Security==1.6.0
 Flask-WTF==0.8.3
 Flask-WhooshAlchemy==0.55a
 Jinja2==2.6
+Mako==0.7.3
+MarkupSafe==0.15
 MoIPy==0.1
 SQLAlchemy==0.8.0
 Tempita==0.5.1
 WTForms==1.0.3
 Werkzeug==0.8.3
 Whoosh==2.4.1
+alembic==0.4.2
 blinker==1.2
 decorator==3.4.0
 httplib2==0.8

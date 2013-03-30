@@ -5,6 +5,7 @@
   <title>SecretGifter - An easy way to organize your next gift-exchanging gathering</title>
   <!-- Bootstrap -->
   <link href="{{ url_for('static', filename='css/bootstrap.css')}}" rel="stylesheet" media="screen">
+  <link href="{{ url_for('static', filename='css/bootstrap-responsive.css')}}" rel="stylesheet" media="screen">
   <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css')}}" />
 </head>
 <body>
@@ -13,8 +14,14 @@
   <div class="navbar navbar-fixed-top">
     <div class="navbar-inner">
       <div class="container-narrow">
+
+        <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </a>
         <a href="{{url_for('mainpage')}}" class="brand"><img src="{{url_for('static', filename='img/logo_small.png')}}" alt="" /></a>
-        <div class="nav-collapse collapse pull-right">
+        <div class="nav-collapse collapse">
           <ul class="nav">
             {% if g.user.is_authenticated() %}
             <li><a href="{{url_for('new_draw')}}">New Draw</a></li>
@@ -62,6 +69,7 @@
 
   <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
   <script type="text/javascript" src="{{url_for('static', filename='js/bootstrap.js')}}"></script>
+  <script type="text/javascript" src="{{url_for('static', filename='js/bootstrap-editable.js')}}></script>
   <script>
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
   (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
