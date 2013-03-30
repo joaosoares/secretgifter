@@ -10,7 +10,7 @@
 <body>
 <div id="wrap">
 
-  <div class="navbar navbar-inverse navbar-fixed-top">
+  <div class="navbar navbar-fixed-top">
     <div class="navbar-inner">
       <div class="container-narrow">
         <a href="{{url_for('mainpage')}}" class="brand"><img src="{{url_for('static', filename='img/logo_small.png')}}" alt="" /></a>
@@ -35,9 +35,9 @@
   
 
 
-  <div class="container-narrow body-margin">
-
-  {% with messages = get_flashed_messages() %}
+  <div class="container-narrow">  
+   <div id="content" class="silo silo-first">
+   {% with messages = get_flashed_messages() %}
     {% if messages %}
       {% for message in messages %}
         <div class="alert">
@@ -47,15 +47,16 @@
       {% endfor %}
     {% endif %}
   {% endwith %}
-    
-    <div class="jumbotron">
-      {% block body %}{% endblock %}
-    </div>
+  
+  {% block body %}{% endblock %}
+   </div>
   </div>
 </div>
 <div id="footer">
   <div class="container-narrow">
-    <p class="muted credit">By Joao Soares, 2013</p>
+    <div class="silo silo-last">
+      <p class=" credit">By Joao Soares, 2013</p>
+    </div>
   </div>
 </div>
 

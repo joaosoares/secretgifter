@@ -9,8 +9,9 @@ from models import User, Draw, Participant
 
 @app.route("/")
 def mainpage():
-    if current_user.is_authenticated():
-        return render_template('dashboard.html', user=current_user)
+    if g.user.is_authenticated():
+        recent_draws = Draw.query.filter_by(user_id=g.user.id).all()
+        return render_template('dashboard.html', recent=recent_draws, user=current_user)
     return render_template('index.html')
 
 @app.route("/login", methods=['GET', 'POST'])
@@ -56,16 +57,25 @@ def pricing():
 def draws():
     return "Draws"
 
-@app.route("/draws/new/")
+@app.route("/draws/new/", methods=['GET', 'POST'])
 @login_required
 def new_draw():
-    # IN FUTURE CHECK FOR AUTH AND STUFF
-    new_draw = Draw(creator=g.user)
-    db.session.add(new_draw)
-    db.session.commit()
-    return redirect(url_for('table', drawid=new_draw.id))
-
-    
+    form = AddPersonForm()
+    if form.validate_on_submit():
+        # If there is data entered, make this a new draw
+        new_draw = Draw(creator=g.user)
+        db.session.add(new_draw)
+        db.session.commit()
+        # Add the participant
+        new_person = Participant(name=form.name.data,
+                number=form.number.data,
+                gift=form.gift.data,
+                draw_id=new_draw.id)
+        db.session.add(new_person)
+        db.session.commit()
+        # Redirect to created draw
+        return redirect(url_for('table', drawid=new_draw.id))
+    return render_template("participants.html", form=form)
 
 @app.route("/draws/<drawid>", methods = ['GET', 'POST'])
 @login_required
@@ -74,7 +84,8 @@ def table(drawid):
     if form.validate_on_submit():
         new_person = Participant(name=form.name.data,
                 number=form.number.data,
-                gift=form.gift.data)
+                gift=form.gift.data,
+                draw_id=drawid)
         db.session.add(new_person)
         db.session.commit()
         participants = Participant.query.filter_by(draw_id=drawid).all()

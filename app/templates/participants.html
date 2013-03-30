@@ -1,5 +1,6 @@
 {% extends "layout.html" %}
 {% block body %}
+<h2>New Draw</h2>
 <form class="add" action="" method="post" name="addperson">
 <table class="table table-hover table-striped">
   <tr>
@@ -29,7 +30,7 @@
       <td>{{form.hidden_tag()}}{{form.name}}</td>
       <td>{{form.number}}</td>
       <td>{{form.gift}}</td>
-      <td><input class="btn btn-small" type="submit" value="Add" /></td>
+      <td><input class="btn" type="submit" value="Add" /></td>
     </tr>
 </table>
 </form>

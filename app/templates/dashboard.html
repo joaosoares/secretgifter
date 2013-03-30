@@ -1,7 +1,15 @@
 {% extends "layout.html" %}
 {% block body %}
 <h2>Hey there, {{user.name}}.</h2>
-<p class="lead">What do you want to do?</p>
-<a href="{{url_for('new_draw')}}" class="btn btn-success">Create new draw</a>
-
+<p class="bigger">What do you want to do?</p>
+<a href="{{url_for('new_draw')}}" class="btn btn-info">Create new draw</a>
+<a href="{{url_for('add_credits')}}" class="btn btn-success">Add credits</a>
+</div>
+<div class="silo">
+  <h3>My draws</h3>
+  {% if recent %}
+  <p>Ok you have some things: {{ recent|length }}</p>
+  {% else %}
+  <p>You don't have any draws yet. Create one above!</p>
+  {% endif %}
 {% endblock %}
