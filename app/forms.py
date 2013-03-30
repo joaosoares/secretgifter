@@ -63,6 +63,7 @@ class AddPersonForm(Form):
         rv = Form.validate(self)
         if not rv:
             return False
+        return True
 
         
 

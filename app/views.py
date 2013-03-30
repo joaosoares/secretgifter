@@ -46,7 +46,7 @@ def logout():
 @app.route("/about/")
 def about():
     print "Hi!"
-    return "About page"
+    return render_template('about.html')
 
 @app.route("/pricing/")
 def pricing():
@@ -68,20 +68,21 @@ def new_draw():
     
 
 @app.route("/draws/<drawid>", methods = ['GET', 'POST'])
+@login_required
 def table(drawid):
     form = AddPersonForm()
     if form.validate_on_submit():
         new_person = Participant(name=form.name.data,
                 number=form.number.data,
-                gift=gift.number.data)
+                gift=form.gift.data)
         db.session.add(new_person)
         db.session.commit()
+        participants = Participant.query.filter_by(draw_id=drawid).all()
+        return render_template("participants.html", participants=participants, form=form)
     if g.user.id is not Draw.query.get(drawid).creator.id:
         return redirect(url_for('mainpage'))
-    participants = Participant.query.filter_by(draw_id=drawid)
-    return render_template("participants.html",
-            participants=participants,
-            form=form)
+    participants = Participant.query.filter_by(draw_id=drawid).all()
+    return render_template("participants.html", participants=participants, form=form)
 
 @app.route("/addcredits/")
 def add_credits():

@@ -46,5 +46,8 @@ class Participant(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(50))
     number = db.Column(db.String(10))
+    gift = db.Column(db.String(50))
+    # Indicates the person this participant will have to buy a gift for
+    friend = db.Column(db.Integer, db.ForeignKey('participant.id'))
     draw_id = db.Column(db.Integer, db.ForeignKey('draw.id'))
     
