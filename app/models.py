@@ -1,6 +1,6 @@
 from app import db
 from werkzeug.security import generate_password_hash, check_password_hash
-
+import phonenumbers
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key = True)
@@ -27,7 +27,7 @@ class User(db.Model):
         return True
 
     def is_active(self):
-        return False
+        return True
 
     def is_anonymous(self):
         return False
@@ -40,9 +40,11 @@ class Draw(db.Model):
     id = db.Column(db.Integer, primary_key = True)
     timestamp = db.Column(db.DateTime)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    participants = db.relationship('Participant', backref = 'draw', lazy = 'dynamic')
 
 class Participant(db.Model):
-    __tablename__ = 'participants'
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(50))
     number = db.Column(db.String(10))
+    draw_id = db.Column(db.Integer, db.ForeignKey('draw.id'))
+    

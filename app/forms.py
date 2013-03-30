@@ -54,12 +54,17 @@ class RegistrationForm(Form):
         self.user = user
         return True
 
-
-
 # Adding participants
 class AddPersonForm(Form):
-    name = TextField('Email Address')
+    name = TextField('Name', validators=[Required()])
     number = TextField('Number')
     gift = TextField('Gift')
+    def validate(self):
+        rv = Form.validate(self)
+        if not rv:
+            return False
+
+        
+
 
 

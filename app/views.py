@@ -5,17 +5,17 @@ from flask import session, redirect, url_for, render_template, request, flash, g
 from flask.ext.login import login_user, logout_user, current_user, login_required
 from flask.ext.sqlalchemy import SQLAlchemy
 from forms import LoginForm, AddPersonForm, RegistrationForm
-import models
+from models import User, Draw, Participant
 
 @app.route("/")
 def mainpage():
-    if g.user.is_authenticated():
-        return "Youre logged in bro"
+    if current_user.is_authenticated():
+        return render_template('dashboard.html', user=current_user)
     return render_template('index.html')
 
 @app.route("/login", methods=['GET', 'POST'])
 def login():
-    if g.user is not None and g.user.is_authenticated():
+    if current_user.is_authenticated():
         return redirect(url_for('mainpage'))
     form = LoginForm()
     if form.validate_on_submit():
@@ -40,8 +40,8 @@ def register():
 
 @app.route('/logout/')
 def logout():
-    logodut_user()
-    return redurect(url_for('mainpage'))
+    logout_user()
+    return redirect(url_for('mainpage'))
 
 @app.route("/about/")
 def about():
@@ -52,28 +52,54 @@ def about():
 def pricing():
     return render_template('pricing.html')
 
+@app.route("/draws/")
+def draws():
+    return "Draws"
+
 @app.route("/draws/new/")
+@login_required
 def new_draw():
     # IN FUTURE CHECK FOR AUTH AND STUFF
-    new_draw = models.Draw()
+    new_draw = Draw(creator=g.user)
     db.session.add(new_draw)
     db.session.commit()
-    print "New draw created..."
-    print new_draw.id
     return redirect(url_for('table', drawid=new_draw.id))
 
     
 
 @app.route("/draws/<drawid>", methods = ['GET', 'POST'])
 def table(drawid):
-    add_form = AddPersonForm()
-    if add_form.validate_on_submit():
-        pass
-    return render_template("participants.html", form=add_form)
+    form = AddPersonForm()
+    if form.validate_on_submit():
+        new_person = Participant(name=form.name.data,
+                number=form.number.data,
+                gift=gift.number.data)
+        db.session.add(new_person)
+        db.session.commit()
+    if g.user.id is not Draw.query.get(drawid).creator.id:
+        return redirect(url_for('mainpage'))
+    participants = Participant.query.filter_by(draw_id=drawid)
+    return render_template("participants.html",
+            participants=participants,
+            form=form)
+
+@app.route("/addcredits/")
+def add_credits():
+    return "Add credits"
+
+@app.route("/account/")
+def account():
+    return "Account"
 
 @app.before_request
 def before_request():
     g.user = current_user
+
+# Login Manager
+
+@lm.unauthorized_handler
+def unauthorized():
+    return render_template('noauth.html')
 
 @lm.user_loader
 def load_user(id):
