@@ -1,7 +1,7 @@
 {% extends "layout.html" %}
 {% block body %}
-<div id="no-more-tables">
-<h2 id="title">New Draw</h2> <span 
+<section id="no-more-tables">
+  <h2 id="title" data-type="text" data-pk="1" data-url="/post" >{% if draw and draw.title %}{{draw.title}}{% else %}New Draw{% endif %}</h2>
 <form class="add" action="" method="post" name="addperson">
 <table class="table table-hover table-striped">
   <thead>

@@ -6,7 +6,7 @@ class User(db.Model):
     id = db.Column(db.Integer, primary_key = True)
     email = db.Column(db.String(120), index = True, unique = True)
     name = db.Column(db.String(50), index = True)
-    #lastname = db.Column(db.String(50), index = True)
+    lastname = db.Column(db.String(50))
     pw_hash = db.Column(db.String(260))
     credits = db.Column(db.Integer)
     draws = db.relationship('Draw', backref = 'creator', lazy = 'dynamic')
@@ -39,18 +39,17 @@ class User(db.Model):
 
 class Draw(db.Model):
     id = db.Column(db.Integer, primary_key = True)
-    #title = db.Column(db.String(50), index=True)
-    #location = db.Column(db.String(200))
-    timestamp = db.Column(db.DateTime, index=True)
+    title = db.Column(db.String(50), index = True)
+    location = db.Column(db.String(200))
+    timestamp = db.Column(db.DateTime)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     participants = db.relationship('Participant', backref = 'draw', lazy = 'dynamic')
 
 class Participant(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(50), index=True)
-    number = db.Column(db.String(50))
+    name = db.Column(db.String(50))
+    number = db.Column(db.String(10))
     gift = db.Column(db.String(50))
-    # Indicates the person this participant will have to buy a gift for
+    # Person this participant will buy a gift for
     friend = db.Column(db.Integer, db.ForeignKey('participant.id'))
     draw_id = db.Column(db.Integer, db.ForeignKey('draw.id'))
-    

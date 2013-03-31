@@ -8,8 +8,18 @@
 <div class="silo">
   <h3>My draws</h3>
   {% if recent %}
-  <p>Ok you have some things: {{ recent|length }}</p>
+  <ul>
+  {% for item in recent %}
+  <li><a href="{{url_for('table', drawid=item.id)}}">Item</a></li>
+  {% endfor %}
+  </ul>
   {% else %}
   <p>You don't have any draws yet. Create one above!</p>
   {% endif %}
+{% endblock %}
+
+{% block scripts %}
+<script>
+  $('#title').editable();
+</script>
 {% endblock %}
