@@ -25,7 +25,7 @@
           <ul class="nav">
             {% if g.user.is_authenticated() %}
             <li><a href="{{url_for('new_draw')}}">New Draw</a></li>
-            <li><a href="{{url_for('draws')}}">Draws</a></li>
+            <!-- <li><a href="{{url_for('draws')}}">Draws</a></li> -->
             <li><a href="{{url_for('add_credits')}}">Add credits</a></li>
             <li><a href="{{url_for('account')}}">Account</a></li>
             <li><a href="{{url_for('logout')}}">Logout</a></li>

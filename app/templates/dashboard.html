@@ -1,3 +1,4 @@
+{% from "_helpers.html" import render_draw %}
 {% extends "layout.html" %}
 {% block body %}
 <h2>Hey there, {{user.name}}.</h2>
@@ -8,9 +9,9 @@
 <div class="silo">
   <h3>My draws</h3>
   {% if recent %}
-  <ul>
+  <ul class="thumbnails">
   {% for item in recent %}
-  <li><a href="{{url_for('table', drawid=item.id)}}">Item</a></li>
+  {{ render_draw(item) }}
   {% endfor %}
   </ul>
   {% else %}

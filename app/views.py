@@ -10,9 +10,16 @@ from models import User, Draw, Participant
 @app.route("/")
 def mainpage():
     if g.user.is_authenticated():
+        return redirect(url_for('dashboard'))
+    return render_template('index.html')
+
+@app.route("/dashboard/")
+@login_required
+def dashboard():
+    if g.user.is_authenticated():
         recent_draws = Draw.query.filter_by(user_id=g.user.id).all()
         return render_template('dashboard.html', recent=recent_draws, user=current_user)
-    return render_template('index.html')
+
 
 @app.route("/login", methods=['GET', 'POST'])
 def login():
@@ -40,6 +47,7 @@ def register():
     return render_template('register.html', form=form)
 
 @app.route('/logout/')
+@login_required
 def logout():
     logout_user()
     return redirect(url_for('mainpage'))
@@ -96,10 +104,12 @@ def table(drawid):
     return render_template("participants.html", participants=participants, form=form)
 
 @app.route("/addcredits/")
+@login_required
 def add_credits():
-    return "Add credits"
+    return render_template("addcredits.html")
 
 @app.route("/account/")
+@login_required
 def account():
     return "Account"
 

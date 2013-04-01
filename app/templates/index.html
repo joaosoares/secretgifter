@@ -8,8 +8,18 @@
 </div>
 <div class="silo">
   <h2>How it works</h2>
-  <hr />
-  <p class="lead">1. Create a new draw</p>
+  <div class="thumbnail well">
+    <img src="{{url_for('static', filename='img/sg_draw.jpg')}}" alt="" />
+    <p class="lead">1. Create a new draw and add participants</p>
+  </div>
+  <div class="thumbnail well">
+  <img src="{{url_for('static', filename='img/sg_iphone.jpg')}}" alt="" />
+  <p class="lead">2. Send a SMS to all participants</p>
+  </div>
+  <div class="thumbnail well">
+    <img src="http://placehold.it/700x300" alt="" />
+  <p class="lead">3. Enjoy your gathering!</p>
+  </div>
   
 
 {% endblock %}

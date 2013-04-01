@@ -1,10 +1,11 @@
 {% extends "layout.html" %}
 {% block body %}
-<h2>Pricing</h2>
+<h2>Add credits</h2>
 <p class="lead">In order to send SMS informing all participants of their secret friends, you need
 to add credits to your account.</p>
 <div id="credits">
 <p>1 credit = 1 text message</p>
+<p>You have {{g.user.credits}} credits.</p>
 </div>
 
 {% endblock %}

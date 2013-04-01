@@ -8,3 +8,12 @@
   </div>
 </div>
 {% endmacro %}
+
+{% macro render_draw(draw) %}
+  <li class="span2">
+    <div class="thumbnail">
+      <h4><a href="{{url_for('table', drawid=draw.id)}}">{{draw.title}}</a></h4>
+
+    </div>
+  </li>
+{% endmacro %}

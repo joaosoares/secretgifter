@@ -1,13 +1,15 @@
 {% extends "layout.html" %}
 {% block body %}
+<div id="top">
   <h2 id="title" class="editable" >{% if draw and draw.title %}{{draw.title}}{% else %}New Draw{% endif %}</h2>
   <div class="btn-group">
     <a href="#" class="btn btn-primary">Draw Names</a>
     <a href="#" class="btn">Yes</a>
     <a href="#" class="btn">No</a>
   </div>
+</div>
 <form class="add" action="" method="post" name="addperson">
-<table class="table table-hover table-striped">
+<table class="table table-hover well">
   <thead>
   <tr>
     <th>Name</th>
