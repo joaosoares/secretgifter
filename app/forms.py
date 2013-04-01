@@ -1,4 +1,4 @@
-from flask.ext.wtf import Form, TextField, BooleanField, PasswordField, validators
+from flask.ext.wtf import Form, RecaptchaField, TextField, BooleanField, PasswordField, validators
 from flask.ext.wtf import Required
 from models import User
 
@@ -40,6 +40,7 @@ class RegistrationForm(Form):
     ])
     confirm = PasswordField('Repeat Password')
     accept_tos = BooleanField('I accept the TOS', [validators.Required()])
+    recaptcha = RecaptchaField('Enter the following code')
     def validate(self):
         rv = Form.validate(self)
         if not rv:
@@ -47,7 +48,7 @@ class RegistrationForm(Form):
 
         user = User.query.filter_by(email=self.email.data).first()
         if user:
-            self.username.errors.append('Email already in use.')
+            self.email.errors.append('Email already in use.')
             return False
         
         user = User(self.email.data, self.password.data, self.name.data)

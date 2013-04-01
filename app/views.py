@@ -1,7 +1,7 @@
 import os
 from app import app, db, lm
 import main
-from flask import session, redirect, url_for, render_template, request, flash, g
+from flask import jsonify, session, redirect, url_for, render_template, request, flash, g
 from flask.ext.login import login_user, logout_user, current_user, login_required
 from flask.ext.sqlalchemy import SQLAlchemy
 from forms import LoginForm, AddPersonForm, RegistrationForm

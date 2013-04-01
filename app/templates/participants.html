@@ -1,7 +1,11 @@
 {% extends "layout.html" %}
 {% block body %}
-<section id="no-more-tables">
-  <h2 id="title" data-type="text" data-pk="1" data-url="/post" >{% if draw and draw.title %}{{draw.title}}{% else %}New Draw{% endif %}</h2>
+  <h2 id="title" class="editable" >{% if draw and draw.title %}{{draw.title}}{% else %}New Draw{% endif %}</h2>
+  <div class="btn-group">
+    <a href="#" class="btn btn-primary">Draw Names</a>
+    <a href="#" class="btn">Yes</a>
+    <a href="#" class="btn">No</a>
+  </div>
 <form class="add" action="" method="post" name="addperson">
 <table class="table table-hover table-striped">
   <thead>
@@ -15,11 +19,16 @@
   <tbody>
   {% if participants %}
   {% for person in participants %}
-    <tr>
-      <td>{{ person.name }}</td>
-      <td>{{ person.number }}</td>
+    <tr id="row{{person.id}}">
+      <td class="name">{{ person.name }}</td>
+      <td class="number">{{ person.number }}</td>
       <td>{{ person.gift }}</td>
-      <td><small><a href="#">Edit</a> / <a href="#">Remove</a></small></td>
+      <td>
+        <div class="btn-group">
+          <a href="#" class="btn btn-mini">Edit</a>
+          <a href="#" class="btn btn-mini btn-warning">Remove</a>
+        </div>
+      </td>
     </tr>
   {% endfor %}
   {% else %}
@@ -40,4 +49,20 @@
 </table>
 </form>
 </div>
+{% endblock %}
+
+{% block scripts %}
+{{ super() }}
+<script>
+  $.fn.editable.defaults.mode =  'inline';
+
+  $('#title').editable({
+    type: 'text',
+    placement: 'right',
+    showbuttons: false,
+                      
+  });
+
+  function edit
+</script>
 {% endblock %}

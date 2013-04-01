@@ -1,14 +1,12 @@
+{% from "_formhelpers.html" import render_field %}
 {% extends "layout.html" %}
 {% block body %}
 
-  <legend>Register now</legend>
-<form method="POST" id="register" class="form-horizontal form-fullpage well" name="register">
+  <h2>Register now</h2>
+<form method="POST" id="register" class="form-horizontal  well" name="register">
   {{form.hidden_tag()}}
   {% for field in form if field.widget.input_type != 'hidden' %}
-  <div class="control-group">
-    {{field.label(class_="control-label")}}
-    <div class="controls">{{field(placeholder=field.label.text)}}</div>
-  </div>
+    {{ render_field(field) }}
   {% endfor %}
   <div class="control-group">
     <div class="controls">
