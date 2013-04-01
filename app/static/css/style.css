@@ -18,7 +18,7 @@ hr {
   border-top: 1px solid gray
 }
 
-.thumbnail h4 {
+.thumbnail h4, p {
   margin: 0;
 }
 
@@ -31,7 +31,7 @@ hr {
 .container-narrow {
   margin: 0 auto;
   padding:0;
-  max-width:700px;
+  max-width:750px;
 }
 
 .silo {
@@ -46,7 +46,7 @@ hr {
 }
 
 .silo-first {
-  margin-top: 30px;
+  padding-top:40px;
 }
 
 .silo-last {
@@ -134,19 +134,12 @@ body {
 #push,
 #footer {
   height: 60px;
-
-  padding:20px 20px 0;
 }
-#footer .container-narrow{
-/*  height: 60px;
-  background-color: rgba(255,255,255,0.5);
-  -webkit-border-radius: 10px 10px 0 0;
-  -moz-border-radius: 10px;
-  border-radius: 10px 10px 0 0;
-*/}
 
-#footer .container-inner {
-  padding:20px 20px 0;
+
+
+#wrap  .container-inner {
+  padding-top:60px;
 
 /* Lastly, apply responsive CSS fixes as necessary */
 @media (max-width: 767px) {

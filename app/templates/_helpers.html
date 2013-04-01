@@ -13,6 +13,8 @@
   <li class="span2">
     <div class="thumbnail">
       <h4><a href="{{url_for('table', drawid=draw.id)}}">{{draw.title}}</a></h4>
+      <p>{{momentjs(draw.updated_on).proper()}}</p>
+      <p>{{draw.get_participants_string() }}</p>
 
     </div>
   </li>

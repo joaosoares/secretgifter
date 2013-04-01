@@ -41,15 +41,27 @@ class Draw(db.Model):
     id = db.Column(db.Integer, primary_key = True)
     title = db.Column(db.String(50), index = True)
     location = db.Column(db.String(200))
-    timestamp = db.Column(db.DateTime)
+    created_on = db.Column(db.DateTime, default=db.func.now())
+    updated_on = db.Column(db.DateTime, default=db.func.now(), onupdate=db.func.now())
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     participants = db.relationship('Participant', backref = 'draw', lazy = 'dynamic')
+
+    def get_participants_string(self):
+        total = self.participants.all()
+        if len(total) == 0:
+            return "No participants"
+        elif len(total) == 1:
+            return "%s participant" % len(total)
+        elif len(total) > 1:
+            return "%s participants" % len(total)
 
 class Participant(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(50))
-    number = db.Column(db.String(10))
+    number = db.Column(db.String(30))
     gift = db.Column(db.String(50))
     # Person this participant will buy a gift for
     friend = db.Column(db.Integer, db.ForeignKey('participant.id'))
     draw_id = db.Column(db.Integer, db.ForeignKey('draw.id'))
+
+
